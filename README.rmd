@@ -7,6 +7,7 @@ output:
 # Purpose
 This serves as my notebook for the third practical for financial econometrics. Today we are looking at portfolio optimization using both linear and quadratic solvers.
 
+The link for the practical class is \url[https://www.youtube.com/watch?v=7u_kLDcFk94]
 
 ```{r}
 
@@ -70,8 +71,7 @@ Of course the accuracy of this out-of-sample depends on various factors, includi
 
 Contrasting in-sample (IS) efficiency with out-of-sample (OOS) inaccuracy is a fun past-time enjoyed by many a scholar.
 
-Further, MVO is part of the subjective optimization model suite - i.e. where a required return level is provided. Another common example includes portfolio utility optimization, where an explicit risk preference (typically called λ
-) is provided and incorporated into the optimization as:
+Further, MVO is part of the subjective optimization model suite - i.e. where a required return level is provided. Another common example includes portfolio utility optimization, where an explicit risk preference (typically called λ) is provided and incorporated into the optimization as:
 
 MaxUP=E(RP)−λi∗σp
 
@@ -83,7 +83,7 @@ For the above, the level of risk is given and return and risk optimized around i
 ### Notes
 
 Port (Balanced)
-have restrictions-> wights risk prefenrences
+have restrictions-> weights risk prefenrences
 plug into optimizer 
 
 mean variance frontier (We want port to be on the frontier) although optimizer may choose something inside the frontier (hold inferior asset (mean to SD))
@@ -276,6 +276,8 @@ Lets go back to the amat that we need to be singular
 ```{r}
 # Note I set impute_returns_method to NONE by default. This will produce a warning if there is indeed a missing return in the matrix...
 
+#Note that to use this function the return matrix must be in the format of cols = date, stocks therefor wide
+#date must be with a small d
 impute_missing_returns <- function(return_mat, impute_returns_method = "NONE"){
   # Make sure we have a date column called date:
   if( !"date" %in% colnames(return_mat) ) stop("No 'date' column provided in return_mat. Try again please.")
@@ -326,7 +328,7 @@ impute_missing_returns <- function(return_mat, impute_returns_method = "NONE"){
           bind_cols(
             return_mat %>% gather(Stocks, Returns, -date),
             return_mat %>% gather(Stocks, Returns, -date) %>%
-              mutate(Dens = list(density(Returns, na.rm=T))) %>%
+              mutate(Dens = list(density(Returns, na.rm=T))) %>% #The density function here just gives the density attributes of the onject in this case returns
               summarise(set.seed(as.numeric(format( Sys.time(), format = "%s"))/1e3*sample(1:100)[1]), Random_Draws = list(sample(Dens[[1]]$x, NAll, replace = TRUE, prob=.$Dens[[1]]$y))) %>%
               unnest(Random_Draws)
           ) %>%
@@ -395,7 +397,7 @@ Let’s get the simplest form of a covariance matrix, and then calculate the geo
 return_mat_Nodate <- data.matrix(return_mat[, -1])
 
 # Simple Sample covariance and mean:
-Sigma <- RiskPortfolios::covEstimation(return_mat_Nodate)
+Sigma <- RiskPortfolios::covEstimation(return_mat_Nodate) # this has to be a (TxN) matrix of returns, therefore the line above just removes the date column and makes it a matrixs not a df
 # Simple means (should not be used here):
 # Mu <- RiskPortfolios::meanEstimation(return_mat_Nodate)
 
@@ -472,6 +474,7 @@ For our sample covariance matrix, this can simply be implemented as:
 ```{r}
 # Ledoit Wolf shrinkage:
 Sigma_LW <- RiskPortfolios::covEstimation(return_mat_Nodate, control = list(type = "lw"))
+#Think about this as reducing noise and that you are removing outliers
 
 # shrinkage using constant correlation matrix:
 Sigma_const <- RiskPortfolios::covEstimation(return_mat_Nodate, control = list(type = "const"))
@@ -777,7 +780,7 @@ It then repeats this on a rolling basis…
 
 The following is how we loaded our data previously:
 ```{r}
-cman::p_load(tidyverse)
+pacman::p_load(tidyverse)
 pacman::p_load(RiskPortfolios);pacman::p_load(fitHeavyTail)
 
 StartDate <- lubridate::ymd(20100101)

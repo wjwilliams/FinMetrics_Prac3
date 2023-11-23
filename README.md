@@ -13,8 +13,8 @@ gc() # garbage collection - It can be useful to call gc after a large object has
 ```
 
     ##          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-    ## Ncells 464982 24.9     993868 53.1         NA   669302 35.8
-    ## Vcells 871215  6.7    8388608 64.0      16384  1840208 14.1
+    ## Ncells 464982 24.9     993867 53.1         NA   669305 35.8
+    ## Vcells 871219  6.7    8388608 64.0      16384  1840207 14.1
 
 ``` r
 library(tidyverse)
@@ -513,18 +513,18 @@ bootstraped return is based only on its own distribution of returns)
 ```
 
     ## # A tibble: 90 × 6
-    ##    date          Fund_1  Fund_2   Fund_3    Fund_4    Fund_5
-    ##    <date>         <dbl>   <dbl>    <dbl>     <dbl>     <dbl>
-    ##  1 2015-01-31  0.00411   0.0107  0.0338   0.0387    0.000464
-    ##  2 2015-02-28  0.0501    0.0209  0.0457   0.00691   0.0521  
-    ##  3 2015-03-31 -0.0182   -0.0352  0.0218  -0.0218    0.00500 
-    ##  4 2015-04-30  0.0335    0.0388  0.0290   0.0379    0.0682  
-    ##  5 2015-05-31  0.000094 -0.0211 -0.0201   0.000862 -0.0432  
-    ##  6 2015-06-30 -0.0164   -0.0263 -0.00556  0.000106 -0.0181  
-    ##  7 2015-07-31  0.0576   -0.0132  0.0124   0.0508   -0.0297  
-    ##  8 2015-08-31 -0.00583  -0.0265 -0.0289  -0.0305   -0.0336  
-    ##  9 2015-09-30 -0.0317   -0.0307  0.0104   0.00994  -0.0502  
-    ## 10 2015-10-31  0.0357    0.0587  0.0631   0.0765    0.0693  
+    ##    date          Fund_1  Fund_2   Fund_3   Fund_4    Fund_5
+    ##    <date>         <dbl>   <dbl>    <dbl>    <dbl>     <dbl>
+    ##  1 2015-01-31  0.00411   0.0107  0.0338  -0.0316   0.000464
+    ##  2 2015-02-28  0.0501    0.0209  0.0457   0.0341   0.0521  
+    ##  3 2015-03-31 -0.0182   -0.0352  0.0218  -0.0105   0.00500 
+    ##  4 2015-04-30  0.0335    0.0388  0.0290  -0.0127   0.0682  
+    ##  5 2015-05-31  0.000094 -0.0211 -0.0201   0.0122  -0.0432  
+    ##  6 2015-06-30 -0.0164   -0.0263 -0.00556  0.154   -0.0181  
+    ##  7 2015-07-31  0.0576   -0.0132  0.0124   0.0303  -0.0297  
+    ##  8 2015-08-31 -0.00583  -0.0265 -0.0289  -0.0305  -0.0336  
+    ##  9 2015-09-30 -0.0317   -0.0307  0.0104   0.00994 -0.0502  
+    ## 10 2015-10-31  0.0357    0.0587  0.0631   0.0765   0.0693  
     ## # ℹ 80 more rows
 
 Now the collective distribution such that the bootstapped return is
@@ -537,13 +537,13 @@ based on the distribution of of all the stocks in the portfolio
     ## # A tibble: 90 × 6
     ##    date          Fund_1  Fund_2   Fund_3   Fund_4    Fund_5
     ##    <date>         <dbl>   <dbl>    <dbl>    <dbl>     <dbl>
-    ##  1 2015-01-31  0.00411   0.0107  0.0338   0.00969  0.000464
-    ##  2 2015-02-28  0.0501    0.0209  0.0457   0.0364   0.0521  
-    ##  3 2015-03-31 -0.0182   -0.0352  0.0218  -0.0285   0.00500 
-    ##  4 2015-04-30  0.0335    0.0388  0.0290   0.0349   0.0682  
-    ##  5 2015-05-31  0.000094 -0.0211 -0.0201   0.0585  -0.0432  
-    ##  6 2015-06-30 -0.0164   -0.0263 -0.00556 -0.0124  -0.0181  
-    ##  7 2015-07-31  0.0576   -0.0132  0.0124   0.0242  -0.0297  
+    ##  1 2015-01-31  0.00411   0.0107  0.0338  -0.0376   0.000464
+    ##  2 2015-02-28  0.0501    0.0209  0.0457  -0.0109   0.0521  
+    ##  3 2015-03-31 -0.0182   -0.0352  0.0218   0.0143   0.00500 
+    ##  4 2015-04-30  0.0335    0.0388  0.0290   0.0669   0.0682  
+    ##  5 2015-05-31  0.000094 -0.0211 -0.0201   0.0295  -0.0432  
+    ##  6 2015-06-30 -0.0164   -0.0263 -0.00556  0.0143  -0.0181  
+    ##  7 2015-07-31  0.0576   -0.0132  0.0124   0.0250  -0.0297  
     ##  8 2015-08-31 -0.00583  -0.0265 -0.0289  -0.0305  -0.0336  
     ##  9 2015-09-30 -0.0317   -0.0307  0.0104   0.00994 -0.0502  
     ## 10 2015-10-31  0.0357    0.0587  0.0631   0.0765   0.0693  
@@ -554,7 +554,7 @@ based on the distribution of of all the stocks in the portfolio
 impute_missing_returns(return_mat_Quick, impute_returns_method = "Drawn_Distribution_Own") %>% pull(Fund_4) %>% sd()
 ```
 
-    ## [1] 0.04064415
+    ## [1] 0.04346215
 
 ``` r
 return_mat_Quick %>% pull(Fund_4) %>% sd(., na.rm=T)
@@ -769,7 +769,7 @@ library(quadprog)
 NStox <- ncol( return_mat_Nodate )
 LB = 0.01
 UB = 0.25
-meq = 1 # as only the first column of Amat is an equality (weight sum equals 1)
+meq = 1 # as only the first column of Amat is an equality (weight sum equals 1) If have differnet asset classes eg 2 different classes then this would become 3
 
 bvec <- c( 1, rep(LB, NStox), -rep(UB, NStox))
 Amat <- cbind(1, diag(NStox), -diag(NStox))
@@ -792,7 +792,7 @@ Amat <- cbind(1, diag(NStox), -diag(NStox))
     ##    stocks         weight
     ##    <chr>           <dbl>
     ##  1 ADS GR Equity  0.01  
-    ##  2 AFX GR Equity  0.01  
+    ##  2 AFX GR Equity  0.0300
     ##  3 AIR GR Equity  0.0100
     ##  4 ALV GR Equity  0.0100
     ##  5 AT1 GR Equity  0.0100
@@ -876,7 +876,7 @@ tibble(
     ## # A tibble: 1 × 2
     ##   average_ret_Ann volatility_Ann
     ##             <dbl>          <dbl>
-    ## 1          0.0727          0.161
+    ## 1          0.0726          0.160
 
 ## MVO
 
@@ -1249,16 +1249,16 @@ My_Weights
     ## # A tibble: 70 × 5
     ##    Tickers            mv  minvol     erc riskeff
     ##    <chr>           <dbl>   <dbl>   <dbl>   <dbl>
-    ##  1 1COV GR Equity 0.0143 0.00662 0.0162   0.0143
-    ##  2 ADS GR Equity  0.0143 0.001   0.00909  0.0143
-    ##  3 AFX GR Equity  0.0143 0.001   0.0118   0.0143
-    ##  4 AIR GR Equity  0.0143 0.00100 0.00877  0.0143
-    ##  5 ALV GR Equity  0.0143 0.00100 0.00800  0.0143
-    ##  6 AT1 GR Equity  0.0143 0.0570  0.0341   0.0143
-    ##  7 B4B GR Equity  0.0143 0.0530  0.0314   0.0143
-    ##  8 BAS GR Equity  0.0143 0.00100 0.00773  0.0143
-    ##  9 BAYN GR Equity 0.0143 0.00100 0.00832  0.0143
-    ## 10 BC8 GR Equity  0.0143 0.00100 0.00793  0.0143
+    ##  1 1COV GR Equity 0.0143 0.0132  0.0159   0.0143
+    ##  2 ADS GR Equity  0.0143 0.001   0.00911  0.0143
+    ##  3 AFX GR Equity  0.0143 0.001   0.0117   0.0143
+    ##  4 AIR GR Equity  0.0143 0.00100 0.00876  0.0143
+    ##  5 ALV GR Equity  0.0143 0.001   0.00798  0.0143
+    ##  6 AT1 GR Equity  0.0143 0.0614  0.0343   0.0143
+    ##  7 B4B GR Equity  0.0143 0.0571  0.0360   0.0143
+    ##  8 BAS GR Equity  0.0143 0.00100 0.00775  0.0143
+    ##  9 BAYN GR Equity 0.0143 0.00100 0.00826  0.0143
+    ## 10 BC8 GR Equity  0.0143 0.00100 0.00799  0.0143
     ## # ℹ 60 more rows
 
 Let’s now apply the latter function in a way to make it rolling (by
@@ -1327,14 +1327,14 @@ Result
     ## # A tibble: 8,540 × 7
     ##    Tickers            mv  minvol     erc riskeff date       Look_Back_Period
     ##    <chr>           <dbl>   <dbl>   <dbl>   <dbl> <date>                <dbl>
-    ##  1 1COV GR Equity 0.0143 0.00662 0.0162   0.0143 2010-01-29               36
-    ##  2 ADS GR Equity  0.0143 0.001   0.00909  0.0143 2010-01-29               36
-    ##  3 AFX GR Equity  0.0143 0.001   0.0118   0.0143 2010-01-29               36
-    ##  4 AIR GR Equity  0.0143 0.00100 0.00877  0.0143 2010-01-29               36
-    ##  5 ALV GR Equity  0.0143 0.00100 0.00800  0.0143 2010-01-29               36
-    ##  6 AT1 GR Equity  0.0143 0.0570  0.0341   0.0143 2010-01-29               36
-    ##  7 B4B GR Equity  0.0143 0.0530  0.0314   0.0143 2010-01-29               36
-    ##  8 BAS GR Equity  0.0143 0.00100 0.00773  0.0143 2010-01-29               36
-    ##  9 BAYN GR Equity 0.0143 0.00100 0.00832  0.0143 2010-01-29               36
-    ## 10 BC8 GR Equity  0.0143 0.00100 0.00793  0.0143 2010-01-29               36
+    ##  1 1COV GR Equity 0.0143 0.0132  0.0159   0.0143 2010-01-29               36
+    ##  2 ADS GR Equity  0.0143 0.001   0.00911  0.0143 2010-01-29               36
+    ##  3 AFX GR Equity  0.0143 0.001   0.0117   0.0143 2010-01-29               36
+    ##  4 AIR GR Equity  0.0143 0.00100 0.00876  0.0143 2010-01-29               36
+    ##  5 ALV GR Equity  0.0143 0.001   0.00798  0.0143 2010-01-29               36
+    ##  6 AT1 GR Equity  0.0143 0.0614  0.0343   0.0143 2010-01-29               36
+    ##  7 B4B GR Equity  0.0143 0.0571  0.0360   0.0143 2010-01-29               36
+    ##  8 BAS GR Equity  0.0143 0.00100 0.00775  0.0143 2010-01-29               36
+    ##  9 BAYN GR Equity 0.0143 0.00100 0.00826  0.0143 2010-01-29               36
+    ## 10 BC8 GR Equity  0.0143 0.00100 0.00799  0.0143 2010-01-29               36
     ## # ℹ 8,530 more rows

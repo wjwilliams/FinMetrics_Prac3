@@ -534,7 +534,7 @@ library(quadprog)
 NStox <- ncol( return_mat_Nodate )
 LB = 0.01
 UB = 0.25
-meq = 1 # as only the first column of Amat is an equality (weight sum equals 1)
+meq = 1 # as only the first column of Amat is an equality (weight sum equals 1) If have differnet asset classes eg 2 different classes then this would become 3
 
 bvec <- c( 1, rep(LB, NStox), -rep(UB, NStox))
 Amat <- cbind(1, diag(NStox), -diag(NStox))
